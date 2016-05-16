@@ -1,23 +1,7 @@
+var numero=0;
 $(document).ready(function(){
-	var numero=0;
-	$(".small-box").click(function(){
-		numero+=1;
-		if(numero%2==0){
-			$(this).text("X");
-			$(this).off("click");
-				var resultado=juego("X");
-				if (numero==9){
-					alert("PERDISTE");
-				}
-		} else {
-			$(this).text("O");
-			$(this).off("click");
-				var resultado=juego("X");
-				if (numero==9){
-					alert("PERDISTE");
-				}
-		}
-	})
+	$(".small-box").click(play);
+	$("#nuevo").click(newPlay);
 })
 function juego(valor){
 	var box1= $("#box1").text()
@@ -50,4 +34,34 @@ function juego(valor){
 		gamer = false;
 	}
 	return gamer;
+}
+function newPlay(){
+	$("#box1").text("+");
+	$("#box2").text("+");
+	$("#box3").text("+");
+	$("#box4").text("+");
+	$("#box5").text("+");
+	$("#box6").text("+");
+	$("#box7").text("+");
+	$("#box8").text("+");
+	$("#box9").text("+");
+$(".small-box").off("click");
+$(".small-box").click(play);
+numero=0;
+}
+
+function play (){
+	var resultado;
+	numero+=1;
+	if(numero%2==0){
+		$(this).text("X");
+		resultado=juego("X");			
+	} else {
+		$(this).text("O");
+		resultado=juego("O");
+	}
+	$(this).off("click");
+	if (numero==9 && !resultado){
+		alert("PERDISTE");
+	}
 }
